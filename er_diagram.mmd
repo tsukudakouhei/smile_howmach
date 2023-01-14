@@ -15,7 +15,7 @@ authentications {
   string provider
 }
 
-smaile_prices {
+smile_prices {
 	integer id PK
 	integer user_id FK
 	integer price
@@ -27,16 +27,16 @@ macd_menus {
 	integer price
 }
 
-smaile_prices_macd_menus {
+smile_prices_macd_menus {
 	integer id PK
-	integer smaile_price_id FK
+	integer smile_price_id FK
 	integer  macd_menu_id FK
 }
 
 posts {
 	integer id PK
 	integer user_id FK
-	integer smaile_price_id FK
+	integer smile_price_id FK
 	string body
 }
 
@@ -47,10 +47,10 @@ favorites {
 }
 
 users ||--|| authentications: ""
-users ||--o{ smaile_prices: ""
-smaile_prices ||--o{ smaile_prices_macd_menus: ""
-macd_menus ||--o{ smaile_prices_macd_menus: ""
+users ||--o{ smile_prices: ""
+smile_prices ||--o{ smile_prices_macd_menus: ""
+macd_menus ||--o{ smile_prices_macd_menus: ""
 users ||--o{ posts: ""
-posts ||--|| smaile_prices:""
+posts ||--|| smile_prices:""
 users ||--o{ favorites: ""
 posts ||--o{ favorites: ""
