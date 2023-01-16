@@ -1,0 +1,56 @@
+erDiagram
+
+users {
+	integer id PK
+  string name
+  string email
+	string crypted_password
+	string salt
+	integer role
+}
+
+authentications {
+	integer id PK
+  integer user_id FK
+  string provider
+}
+
+smile_prices {
+	integer id PK
+	integer user_id FK
+	integer price
+}
+
+macd_menus {
+	integer id PK
+	string name
+	integer price
+}
+
+smile_prices_macd_menus {
+	integer id PK
+	integer smile_price_id FK
+	integer  macd_menu_id FK
+}
+
+posts {
+	integer id PK
+	integer user_id FK
+	integer smile_price_id FK
+	string body
+}
+
+favorites {
+	integer id PK
+	integer user_id FK
+	integer post_id FK
+}
+
+users ||--|| authentications: ""
+users ||--o{ smile_prices: ""
+smile_prices ||--o{ smile_prices_macd_menus: ""
+macd_menus ||--o{ smile_prices_macd_menus: ""
+users ||--o{ posts: ""
+posts ||--|| smile_prices:""
+users ||--o{ favorites: ""
+posts ||--o{ favorites: ""
