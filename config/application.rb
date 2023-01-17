@@ -19,7 +19,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module SmallHowmach
+module SmileHowmach
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
@@ -31,6 +31,16 @@ module SmallHowmach
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.generators do |g|
+      g.skip_routes true #ルーティングを生成しない
+      g.assets false #assetsを生成しない
+      g.helper false #helperを生成しない
+      g.test_framework :rspec, #testファイルを生成しない
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: false
+    end
 
     # Don't generate system test files.
     config.generators.system_tests = nil

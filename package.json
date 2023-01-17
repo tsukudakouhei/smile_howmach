@@ -1,5 +1,5 @@
 {
-  "name": "small-howmach",
+  "name": "smile-howmach",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
