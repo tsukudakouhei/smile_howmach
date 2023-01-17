@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'top#index'
-  resources :users
+  resources :users, only: %i(new create)
 
-  get 'login' => 'user_sessions#new', :as => :login
-  post 'login' => "user_sessions#create"
-  delete 'logout' => 'user_sessions#destroy', :as => :logout
+  get 'login', to: 'user_sessions#new'
+  post 'login', to: "user_sessions#create"
+  delete 'logout', to: 'user_sessions#destroy'
 end
