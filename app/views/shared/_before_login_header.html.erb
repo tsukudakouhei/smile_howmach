@@ -1,5 +1,8 @@
-<header>
-  <%= link_to 'あなたのスマイル、何円ですか？', root_path  %>
-  <%= link_to '新規登録', new_user_path  %>
-  <%= link_to 'ログイン', login_path  %>
-</header>
+  <!-- nav - start -->
+  <div class="bg-white py-6 sm:py-8 lg:py-12">
+    <nav class="hidden lg:flex gap-12">
+      <%= link_to '新規登録', new_user_path, class: "text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-lg font-semibold transition duration-100"  %>
+      <%= link_to 'ログイン', login_path, class: "text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-lg font-semibold transition duration-100"  %>
+    </nav>
+  </div>
+  <!-- nav - end -->
