@@ -1,0 +1,2 @@
+class SmilePrice < ApplicationRecord
+end
