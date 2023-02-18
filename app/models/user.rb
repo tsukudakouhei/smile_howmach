@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :smile_prices, dependent: :destroy
   authenticates_with_sorcery!
 
   validates :password, length: { minimum: 3 }, presence: true, if: -> { new_record? || changes[:crypted_password] }

@@ -14,9 +14,10 @@ ActiveRecord::Schema.define(version: 2023_01_31_102902) do
 
   create_table "smile_prices", force: :cascade do |t|
     t.integer "price"
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_smile_prices_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -29,4 +30,5 @@ ActiveRecord::Schema.define(version: 2023_01_31_102902) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "smile_prices", "users"
 end
