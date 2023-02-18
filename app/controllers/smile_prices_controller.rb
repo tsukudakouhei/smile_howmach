@@ -25,12 +25,13 @@ class SmilePricesController < ApplicationController
     response = client.detect_faces attrs
     if response
       response.face_details.each do |face_detail|
-      @smile_score = face_detail.smile.confidence
+      @smile_price = face_detail.smile.confidence * 15
+      @smile_value = face_detail.smile.value
       end
-      @smile_price = current_user.smile_prices.build(price: @smile_score)
-      if @smile_price.save
-        binding.pry
-        redirect_to smile_price_path(@smile_price), success: "OKだぜ!"
+      @smile_price -= 750 if @smile_value == false
+      @smile_prices = current_user.smile_prices.build(price: @smile_price)
+      if @smile_prices.save
+        redirect_to smile_price_path(@smile_prices), success: "OKだぜ!"
       else
         flash.now[:danger] = "NGだぜ!"
         render :new
@@ -42,6 +43,6 @@ class SmilePricesController < ApplicationController
   end
 
   def show
-    @smile_price = SmilePrice.find(params[:id])
+    @smile_prices = SmilePrice.find(params[:id])
   end
 end
