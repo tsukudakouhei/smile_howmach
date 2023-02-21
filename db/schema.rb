@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_31_102902) do
+ActiveRecord::Schema.define(version: 2023_02_21_040038) do
+
+  create_table "mac_menus", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "smile_prices", force: :cascade do |t|
     t.integer "price"

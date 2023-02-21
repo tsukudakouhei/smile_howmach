@@ -1,7 +1,84 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+MacMenu.create!(
+  [
+    {
+      name: "油淋鶏チキン セット",
+      price: 740,
+    },
+    {
+      name: "担々ダブルビーフ セット",
+      price: 790,
+    },
+    {
+      name: "スイートチリシュリンプ セット",
+      price: 750,
+    },
+    {
+      name: "ビッグマック セット",
+      price: 750,
+    },
+    {
+      name: "炙り醤油風 ダブル肉厚ビーフ セット",
+      price: 850,
+    },
+    {
+      name: "炙り醤油風 ベーコントマト肉厚ビーフ セット",
+      price: 840,
+    },
+    {
+      name: "ダブルチーズバーガー セット",
+      price: 700,
+    },
+    {
+      name: "油淋鶏チキン",
+      price: 440,
+    },
+    {
+      name: "担々ダブルビーフ",
+      price: 490,
+    },
+    {
+      name: "スイートチリシュリンプ",
+      price: 450,
+    },
+    {
+      name: "ビッグマック",
+      price: 450,
+    },
+    {
+      name: "炙り醤油風 ダブル肉厚ビーフ",
+      price: 450,
+    },
+    {
+      name: "ダブルチーズバーガー",
+      price: 400,
+    },
+    {
+      name: "てりやきマックバーガー",
+      price: 370,
+    },
+    {
+      name: "マックフライポテト Sサイズ",
+      price: 190,
+    },
+    {
+      name: "マックフライポテト Mサイズ",
+      price: 330,
+    },
+    {
+      name: "マックフライポテト Lサイズ",
+      price: 380,
+    },
+    {
+      name: "チキンマックナゲット 5ピース",
+      price: 240,
+    },
+    {
+      name: "チキンマックナゲット 15ピース",
+      price: 710,
+    },
+    {
+      name: "えだまめコーン",
+      price: 250,
+    },
+  ]
+)

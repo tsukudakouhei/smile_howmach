@@ -1,0 +1,2 @@
+class MacMenu < ApplicationRecord
+end
