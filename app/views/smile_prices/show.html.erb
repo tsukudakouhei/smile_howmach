@@ -1,1 +1,6 @@
-<%= @smile_prices.price %>
+<%= @smile_price.price %>
+
+<% @smile_price.mac_menus.each do |mac_manu| %>
+  <%= mac_manu.name %>
+  <%= mac_manu.price %>
+<% end %>
