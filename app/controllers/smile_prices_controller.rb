@@ -23,26 +23,23 @@ class SmilePricesController < ApplicationController
       attributes: ['ALL']
     }
     response = client.detect_faces attrs
-    if response
+    if !response[0].empty?
       response.face_details.each do |face_detail|
         @smile_price = face_detail.smile.confidence * 15
         @smile_value = face_detail.smile.value
       end
-      @smile_price -= 750 if @smile_value == false
+      @smile_price / 2 if @smile_value == false
       @smile_price = current_user.smile_prices.build(price: @smile_price)
       if @smile_price.save
         smile_price = @smile_price.price
         mac_menu_price_min = MacMenu.select("price").order("price asc").first.price
-        binding.pry
         while true
           mac_menu = MacMenu.smileprice_and_below_menu(smile_price).random_choice.first
           @smile_price.smileprices_macdmenus.create(mac_menu_id: mac_menu.id)
           smile_price -= mac_menu.price
           break if smile_price <= mac_menu_price_min
         end
-        # @smile_price.smileprices_macdmenus.
         redirect_to smile_price_path(@smile_price), success: "OKだぜ!"
-        binding.pry
       else
         flash.now[:danger] = "NGだぜ!"
         render :new
