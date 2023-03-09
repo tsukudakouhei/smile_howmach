@@ -2,34 +2,84 @@
 <html>
   <head>
     <title>あなたのスマイル、何円ですか？</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css" rel="stylesheet" type="text/css" />
+    <style>
+        nav {
+          background-color: white;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          font-family: "Helvetica Neue", sans-serif;
+        }
+
+        .nav-link {
+        color: black;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        margin-right: 24px;
+        transition: color 0.2s ease-in-out;
+      }
+
+      .nav-link:hover {
+        color: red;
+      }
+
+      button {
+        margin-right: 24px;
+        font-size: 16px;
+      }
+
+      button:hover {
+        cursor: pointer;
+        filter: brightness(110%);
+      }
+    </style>
   </head>
-  <body>
-      <header class="flex justify-between items-center mb-8 md:mb-12 xl:mb-16">
-        <!-- logo - start -->
-          <a href="/" class="inline-flex items-center text-black-800 text-2xl md:text-3xl font-bold gap-2.5" aria-label="logo">
-            <svg width="95" height="94" viewBox="0 0 95 94" class="w-6 h-auto text-indigo-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M96 0V47L48 94H0V47L48 0H96Z" />
-              
-            </svg>
-            <%#= link_to 'あなたのスマイル、何円ですか？', root_path  %>
-            あなたのスマイル、何円ですか？
-          </a>
-        <!-- logo - end -->
-        <% if logged_in? %>
-          <%= render 'shared/header' %>
-        <% else %>
-          <%= render 'shared/before_login_header' %>
-        <% end %>
-      </header>
+<body class="bg-gray-100 font-sans">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
+    <div class="text-red-500 font-bold text-2xl tracking-wider">How much is your smiley?
+    </div>
+    <div>
+      <% if logged_in? %>
+        <%= render 'shared/header' %>
+      <% else %>
+        <%= render 'shared/before_login_header' %>
+      <% end %>
+    </div>
+  </div>
+      <div class="container mx-auto">
         <%= render 'shared/flash_message' %>
         <%= yield %>
-        <%= render 'shared/footer' %>
-  </body>
+      </div>
+    </div>
+  </div>
+ <footer class="bg-gray-900 py-8">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3">
+      <div class="mb-8 md:mb-0">
+        <h3 class="text-white text-lg font-bold mb-4">About Us</h3>
+        <p class="text-gray-400 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique risus at feugiat commodo. Ut vehicula lorem quis dolor aliquet, vitae lobortis neque interdum.</p>
+      </div>
+      <div class="mb-8 md:mb-0">
+        <h3 class="text-white text-lg font-bold mb-4">Contact Us</h3>
+        <p class="text-gray-400 text-sm">123 Main Street<br>Anytown, USA 12345<br>Phone: (123) 456-7890<br>Email: info@mcdonalds.com</p>
+      </div>
+      <div>
+        <h3 class="text-white text-lg font-bold mb-4">Follow Us</h3>
+        <div class="flex items-center">
+          <a href="#" class="text-gray-400 hover:text-gray-300 mr-4"><i class="fab fa-twitter fa-2x"></i></a>
+          <a href="#" class="text-gray-400 hover:text-gray-300"><i class="fab fa-facebook-f fa-2x"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
 </html>
