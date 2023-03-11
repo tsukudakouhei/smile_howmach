@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_21_123242) do
+ActiveRecord::Schema.define(version: 2023_03_08_143411) do
 
   create_table "mac_menus", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 2023_02_21_123242) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "body"
+    t.integer "user_id", null: false
+    t.integer "smile_price_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["smile_price_id"], name: "index_posts_on_smile_price_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "smile_prices", force: :cascade do |t|
@@ -47,6 +57,8 @@ ActiveRecord::Schema.define(version: 2023_02_21_123242) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "posts", "smile_prices"
+  add_foreign_key "posts", "users"
   add_foreign_key "smile_prices", "users"
   add_foreign_key "smileprices_macdmenus", "mac_menus"
   add_foreign_key "smileprices_macdmenus", "smile_prices"

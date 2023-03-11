@@ -1,4 +1,4 @@
-class CreateSmilepriceMacdmenus < ActiveRecord::Migration[6.1]
+class CreateSmilepricesMacdmenus < ActiveRecord::Migration[6.1]
   def change
     create_table :smileprices_macdmenus do |t|
       t.references :smile_price, null: false, foreign_key: true
