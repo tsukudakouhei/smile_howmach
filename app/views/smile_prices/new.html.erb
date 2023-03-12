@@ -1,5 +1,6 @@
 <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
     <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">スマイル診断</h2>
+    <h3 class="text-gray-800 text-1xl lg:text-1xl font-bold text-center mb-4 md:mb-8">写真は、保存しないので安心して投稿できます。</h3>
     <%= form_with url: smile_prices_path, method: :post, class: "max-w-lg border rounded-lg mx-auto", local: true do |f| %>
       <div class="flex flex-col gap-4 p-4 md:p-8">
         <div>
@@ -10,9 +11,11 @@
           <%= image_tag 'sample.jpeg', class: 'h-150 w-250 object-contain', id: 'preview' %>
         </div>
 
-        <div class="actions">
-          <%= f.submit '送信' %>
-      </div>
+        <div class="flex justify-center">
+          <a href="#" class="mt-4 px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition duration-200">
+            <%= f.submit "送信" %>
+          </a>
+        </div>
     <% end %>
   </div>
 </div>

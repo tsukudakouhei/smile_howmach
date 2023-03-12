@@ -3,7 +3,9 @@ class SmilePricesController < ApplicationController
 
   require 'aws-sdk-rekognition'
 
-  def index; end
+  def index
+    @smile_prices = SmilePrice.all
+  end
 
   def new; end
 
@@ -53,5 +55,21 @@ class SmilePricesController < ApplicationController
   def show
     @smile_price = SmilePrice.find(params[:id])
     @mac_manus = SmilepricesMacdmenu.where(smile_price_id: @smile_price)
+  end
+
+  def update
+    @smile_price = SmilePrice.find(params[:id])
+    if @smile_price.update(set_smile_price_body)
+      redirect_to smile_prices_path, success: "投稿しました。"
+    else
+      flash.now['danger'] = "投稿できませんでした。"
+      render :edit
+    end 
+  end
+
+  private
+
+  def set_smile_price_body
+    params.require(:smile_price).permit(:body)
   end
 end
