@@ -41,13 +41,13 @@ class SmilePricesController < ApplicationController
           smile_price -= mac_menu.price
           break if smile_price <= mac_menu_price_min
         end
-        redirect_to smile_price_path(@smile_price), success: "OKだぜ!"
+        redirect_to smile_price_path(@smile_price), notice: '診断結果でました！'
       else
-        flash.now[:danger] = "NGだぜ!"
+        flash.now[:alert] = "診断失敗しました。"
         render :new
       end
     else
-      flash.now[:danger] = "NGだぜ!"
+      flash.now[:alert] = "診断失敗しました。"
       render :new
     end
   end
