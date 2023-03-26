@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2023_03_12_013207) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "mac_menus", force: :cascade do |t|
     t.string "name"
     t.integer "price"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 2023_03_12_013207) do
 
   create_table "smile_prices", force: :cascade do |t|
     t.integer "price"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "body"
@@ -30,8 +33,8 @@ ActiveRecord::Schema.define(version: 2023_03_12_013207) do
   end
 
   create_table "smileprices_macdmenus", force: :cascade do |t|
-    t.integer "smile_price_id", null: false
-    t.integer "mac_menu_id", null: false
+    t.bigint "smile_price_id", null: false
+    t.bigint "mac_menu_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["mac_menu_id"], name: "index_smileprices_macdmenus_on_mac_menu_id"
