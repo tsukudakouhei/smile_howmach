@@ -10,6 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2023_03_12_013207) do
 
+  create_table "mac_menus", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "smile_prices", force: :cascade do |t|
+    t.integer "price"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "body"
+    t.index ["user_id"], name: "index_smile_prices_on_user_id"
+  end
+
+  create_table "smileprices_macdmenus", force: :cascade do |t|
+    t.integer "smile_price_id", null: false
+    t.integer "mac_menu_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["mac_menu_id"], name: "index_smileprices_macdmenus_on_mac_menu_id"
+    t.index ["smile_price_id"], name: "index_smileprices_macdmenus_on_smile_price_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "crypted_password"
+    t.string "salt"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  add_foreign_key "smile_prices", "users"
+  add_foreign_key "smileprices_macdmenus", "mac_menus"
+  add_foreign_key "smileprices_macdmenus", "smile_prices"
 end

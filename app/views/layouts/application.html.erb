@@ -1,16 +1,70 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SmallHowmach</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>あなたのスマイル、何円ですか？</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= display_meta_tags(default_meta_tags) %>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css" rel="stylesheet" type="text/css" />
+    <style>
+        nav {
+          background-color: white;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          font-family: "Helvetica Neue", sans-serif;
+        }
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
+        .nav-link {
+        color: black;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        margin-right: 24px;
+        transition: color 0.2s ease-in-out;
+      }
+
+      .nav-link:hover {
+        color: red;
+      }
+
+      button {
+        margin-right: 24px;
+        font-size: 16px;
+      }
+
+      button:hover {
+        cursor: pointer;
+        filter: brightness(110%);
+      }
+    </style>
   </head>
+  <body class="bg-gray-100 font-sans">
+    <div class="bg-white px-4 py-5 flex justify-between items-center mb-10">
+      <%= link_to 'How much is your smiley?', root_path, class: "text-red-500 font-bold text-2xl tracking-wider" %>
+      <div>
+        <% if logged_in? %>
+          <%= render 'shared/header' %>
+        <% else %>
+          <%= render 'shared/before_login_header' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="container mx-auto m-10 max-w-7xl mx-auto p-10 bg-white">
+      <div class="container mx-auto">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="my-10">
+            <%= render 'shared/flash_message' %>
+            <%= yield %>
+          </div>
+        </div>
 
-  <body>
-    <%= yield %>
+      </div>
+    </div>
+    <%= render 'shared/footer' %>
   </body>
 </html>
