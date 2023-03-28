@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>あなたのスマイル、何円ですか？</title>
+    <title>スマトレ！</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -45,7 +45,7 @@
   </head>
   <body class="bg-gray-100 font-sans">
     <div class="bg-white px-4 py-5 flex justify-between items-center mb-10">
-      <%= link_to 'How much is your smiley?', root_path, class: "text-red-500 font-bold text-2xl tracking-wider" %>
+      <%= link_to 'スマトレ！', root_path, class: "text-red-500 font-bold text-2xl tracking-wider" %>
       <div>
         <% if logged_in? %>
           <%= render 'shared/header' %>
