@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>スマトレ！</title>
+    <title>スマプラ！</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -9,9 +9,11 @@
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%#= display_meta_tags(default_meta_tags) %>
+    <%= display_meta_tags(default_meta_tags) %>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/736b0ee80c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <style>
         nav {
           background-color: white;
@@ -45,7 +47,7 @@
   </head>
   <body class="bg-gray-100 font-sans">
     <div class="bg-white px-4 py-5 flex justify-between items-center mb-10">
-      <%= link_to 'スマトレ！', root_path, class: "text-red-500 font-bold text-2xl tracking-wider" %>
+      <%= link_to 'スマプラ！', root_path, class: "text-red-500 font-bold text-2xl tracking-wider" %>
       <div>
         <% if logged_in? %>
           <%= render 'shared/header' %>
