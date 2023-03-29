@@ -1,12 +1,12 @@
 module ApplicationHelper
     def default_meta_tags
     {
-      site: 'Pluspo',
-      title: '都内スポーツ施設の横断検索サービス',
+      site: 'スマプラ！',
+      title: 'あなたのスマイルに値段を！',
       reverse: true,
       charset: 'utf-8',
-      description: 'Pluspoを使えば「スポーツ・日時・場所」の好きな組み合わせで自由にスポーツ施設を検索できます。',
-      keywords: 'スポーツ,スポーツ施設,東京',
+      description: 'あなたのスマイルに値段をつけて、値段にあったマックメニューを提案します！',
+      keywords: 'スマイル診断,マクドナルド',
       canonical: request.original_url,
       separator: '|',
       og: {
