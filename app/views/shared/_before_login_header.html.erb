@@ -1,5 +1,64 @@
-<%= link_to 'みんなのスマイル', smile_prices_path, class: "text-black font-bold text-lg hover:text-red-500 transition duration-200 font-medium mr-6" %>
-<a href="#" class="text-black font-bold text-lg hover:text-red-500 transition duration-200 font-medium mr-6">about</a>
-<%= link_to 'スマイル診断', new_smile_price_path, class: "bg-red-500 hover:bg-yellow-500 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg"  %>
-<%= link_to '新規登録', new_user_path, class: "bg-yellow-500 hover:bg-red-500 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg" %>
-<%= link_to 'ログイン', login_path, class: "bg-yellow-500 hover:bg-red-500 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg" %>
+<div class="flex items-center">
+  <div class="flex hidden  sm:hidden md:hidden lg:flex xl:flex">
+    <div class="flex text-center m-4">
+      <a href="#" class="text-black font-bold text-lg hover:text-red-500 transition duration-200 font-medium py-1 md:py-2 px-4 md:px-6">about</a>
+      <%= link_to 'みんなのスマイル', smile_prices_path, class: "text-black font-bold text-lg hover:text-red-500 transition duration-200 font-medium py-1 md:py-2 px-4 md:px-6" %>
+      <%= link_to 'スマイル診断', new_smile_price_path, class: "bg-red-500 hover:bg-yellow-500 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg"  %>
+      <%= link_to '新規登録', new_user_path, class: "bg-yellow-500 hover:bg-red-500 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg" %>
+      <%= link_to 'ログイン', login_path, class: "bg-yellow-500 hover:bg-red-500 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg" %>
+    </div>
+  </div>
+  <div class="relative">
+    <button id="MenuBar" type="button" class="mx-8 sm:flex md:flex lg:hidden xl:hidden items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" aria-expanded="false">
+      <i class="fa-solid fa-bars fa-3x"></i>
+    </button>
+
+    <div id="MenuList" class="hidden absolute top-0 right-0 z-10 flex w-screen max-w-max -translate-x-1/2 px-4">
+      <div class="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+        <div class="p-4">
+          <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+            <div class="mx-auto">
+              <a href="#" class="text-black font-bold text-lg hover:text-red-500 transition duration-200 font-medium py-1 md:py-2 px-4 md:px-6">about</a>
+            </div>
+          </div>
+          <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+            <div class="mx-auto">
+              <div class="mx">
+                <%= link_to 'みんなのスマイル', smile_prices_path, class: "text-black font-bold text-lg hover:text-red-500 transition duration-200 font-medium py-1 md:py-2 px-4 md:px-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+            <div class="mx-auto w-3/4 bg-red-500 hover:bg-yellow-500 rounded-3xl">
+              <div class="w-full py-2 px-8 text-center">
+                <%= link_to 'スマイル診断', new_smile_price_path, class: "text-white font-bold text-base text-center "  %>
+              </div>
+            </div>
+          </div>
+          <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+            <div class="mx-auto w-3/4 bg-yellow-500 hover:bg-red-500 text-white rounded-full">
+              <div class="w-full py-2 px-8 text-center">
+                <%= link_to 'ユーザ作成', new_user_path, class: "text-white font-bold text-base text-center "  %>
+              </div>
+            </div>
+          </div>
+          <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+            <div class="mx-auto w-3/4 bg-yellow-500 hover:bg-red-500 text-white rounded-full">
+              <div class="w-full py-2 px-8 text-center">
+                <%= link_to 'ログイン', login_path, class: "text-white font-bold text-base text-center "  %>
+              </div>
+            </div>
+          </div>
+          <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+            <div class="mx-auto">
+              <button id="MenuClose" type="button" class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" aria-expanded="false">
+                <i class="fas fa-window-close fa-2x"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div >
+<%= javascript_pack_tag "header_menu" %>

@@ -1,10 +1,9 @@
 class SmilePricesController < ApplicationController
-  skip_before_action :require_login
-
+  skip_before_action :require_login, only: %i[index show update]
   require 'aws-sdk-rekognition'
 
   def index
-    @smile_prices = SmilePrice.all
+    @smile_prices = SmilePrice.all.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def new; end
