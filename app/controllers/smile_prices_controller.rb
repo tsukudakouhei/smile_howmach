@@ -9,37 +9,11 @@ class SmilePricesController < ApplicationController
   def new; end
 
   def create
-    credentials = Aws::Credentials.new(
-        Rails.application.credentials[:aws][:access_key_id],
-        Rails.application.credentials[:aws][:secret_access_key]
-        # :region => 'ap-northeast-1',
-    )
-
-    # photo = Base64.decode64(File.expand_path(params[:image]))
-    client = Aws::Rekognition::Client.new region: 'ap-northeast-1', credentials: credentials
-    attrs = {
-      image: {
-        bytes: params[:image]
-      },
-      attributes: ['ALL']
-    }
-    response = client.detect_faces attrs
-    if !response[0].empty?
-      response.face_details.each do |face_detail|
-        @smile_price = face_detail.smile.confidence * 15
-        @smile_value = face_detail.smile.value
-      end
-      @smile_price / 2 if @smile_value == false
-      @smile_price = current_user.smile_prices.build(price: @smile_price)
-      if @smile_price.save
-        smile_price = @smile_price.price
-        mac_menu_price_min = MacMenu.select("price").order("price asc").first.price
-        while true
-          mac_menu = MacMenu.smileprice_and_below_menu(smile_price).random_choice.first
-          @smile_price.smileprices_macdmenus.create(mac_menu_id: mac_menu.id)
-          smile_price -= mac_menu.price
-          break if smile_price <= mac_menu_price_min
-        end
+    @smile_price = detect_smile_price(params[:image])
+    if @smile_price.present?
+      @smile_price = create_smile_price_for_user(current_user, @smile_price)
+      if @smile_price.present?
+        add_mac_menus_to_smile_price(@smile_price)
         redirect_to smile_price_path(@smile_price), notice: '診断結果でました！'
       else
         flash.now[:alert] = "診断失敗しました。"
@@ -70,5 +44,25 @@ class SmilePricesController < ApplicationController
 
   def set_smile_price_body
     params.require(:smile_price).permit(:body)
+  end
+
+  def detect_smile_price(image)
+    credentials = Aws::Credentials.new(
+      Rails.application.credentials[:aws][:access_key_id],
+      Rails.application.credentials[:aws][:secret_access_key]
+    )
+
+    client = Aws::Rekognition::Client.new(region: 'ap-northeast-1', credentials: credentials)
+    attrs = {
+      image: { bytes: image },
+      attributes: ['ALL']
+    }
+
+    response = client.detect_faces(attrs)
+    if response.face_details.empty?
+      nil
+    else
+      response.face_details.map { |face_detail| face_detail.smile.confidence * 15 }.sum
+    end
   end
 end
