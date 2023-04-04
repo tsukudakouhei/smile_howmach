@@ -42,3 +42,5 @@ PULL_REQUEST_TEMPLATE.md
 
 #Desktop Servicesをgithubに上げない
 .DS_Store
+
+.vscode
