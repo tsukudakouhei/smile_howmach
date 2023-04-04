@@ -9,16 +9,11 @@ class SmilePricesController < ApplicationController
   def new; end
 
   def create
-    @smile_price = detect_smile_price(params[:image])
-    if @smile_price.present?
-      @smile_price = create_smile_price_for_user(current_user, @smile_price)
-      if @smile_price.present?
-        add_mac_menus_to_smile_price(@smile_price)
-        redirect_to smile_price_path(@smile_price), notice: '診断結果でました！'
-      else
-        flash.now[:alert] = "診断失敗しました。"
-        render :new
-      end
+    smile_price_creator = SmilePriceCreator.new(params, current_user)
+    @smile_price_record = smile_price_creator.create_smile_price
+
+    if @smile_price_record
+      redirect_to smile_price_path(@smile_price_record), notice: '診断結果でました！'
     else
       flash.now[:alert] = "診断失敗しました。"
       render :new
@@ -44,25 +39,5 @@ class SmilePricesController < ApplicationController
 
   def set_smile_price_body
     params.require(:smile_price).permit(:body)
-  end
-
-  def detect_smile_price(image)
-    credentials = Aws::Credentials.new(
-      Rails.application.credentials[:aws][:access_key_id],
-      Rails.application.credentials[:aws][:secret_access_key]
-    )
-
-    client = Aws::Rekognition::Client.new(region: 'ap-northeast-1', credentials: credentials)
-    attrs = {
-      image: { bytes: image },
-      attributes: ['ALL']
-    }
-
-    response = client.detect_faces(attrs)
-    if response.face_details.empty?
-      nil
-    else
-      response.face_details.map { |face_detail| face_detail.smile.confidence * 15 }.sum
-    end
   end
 end
