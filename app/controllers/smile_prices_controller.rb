@@ -3,7 +3,7 @@ class SmilePricesController < ApplicationController
   require 'aws-sdk-rekognition'
 
   def index
-    @smile_prices = SmilePrice.all.includes(:user).order(created_at: :desc).page(params[:page])
+    @smile_prices = SmilePrice.where(is_published: true).includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def new; end
@@ -38,6 +38,6 @@ class SmilePricesController < ApplicationController
   private
 
   def set_smile_price_body
-    params.require(:smile_price).permit(:body)
+    params.require(:smile_price).permit(:body, :is_published)
   end
 end
