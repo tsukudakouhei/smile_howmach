@@ -23,25 +23,21 @@
   <% end %>
 </div>
 
-<div class="max-w-xl rounded-lg mx-auto">
-  <div class="mb-3">
-    <h2 class="text-lg font-bold text-gray-900 mb-3">公開状態</h2>
-    <% if @smile_price.is_published %>
-      <p class="text-gray-900">公開中</p>
-    <% else %>
-      <p class="text-gray-900">非公開</p>
-    <% end %>
+<%= form_with model: @smile_price, method: :patch, class: "max-w-xl rounded-lg mx-auto", local: true do |f| %>
+
+  <div class="form-group flex items-center mt-3 mb-3">
+    <%= f.check_box :is_published, class: "form-checkbox h-5 w-5 text-black border border-black bg-white mr-2" %>
+    <%= f.label :is_published, '公開', class: "text-gray-900" %>
   </div>
 
-  <div class="mb-5">
-    <h2 class="text-lg font-bold text-gray-900 mb-3">感想投稿</h2>
-    <p class="w-full bg-gray-50 text-gray-800 border rounded px-3 py-2">
-      <%= @smile_price.body %>
-    </p>
-  </div>
+  <%= f.label "感想投稿", class: "text-lg font-bold text-gray-900 mb-5" %>
+  <%= f.text_area :body, class: "w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" %>
 
   <div class="flex justify-center">
-    <%= link_to "スマイル一覧", smile_prices_path, class: "bg-red-500 hover:bg-yellow-500 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg mr-4" %>
-    <%= link_to "edit", edit_smile_price_path(@smile_price), class: "bg-yellow-500 hover:bg-yellow-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg" %>
+    <a class="mt-4 px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition duration-200">
+      <%= f.submit "share", class: "cursor-pointer" %>
+    </a>
   </div>
-</div>
+<% end %>
+
+<%= link_to "スマイル一覧",  smile_prices_path, class: "bg-red-500 hover:bg-yellow-500 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg"  %>
