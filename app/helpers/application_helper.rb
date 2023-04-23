@@ -1,4 +1,15 @@
 module ApplicationHelper
+    def smile_analysis_score_attributes 
+      {
+        '目の表情' => :eye_expression_score,
+        '口元の表情' => :mouth_expression_score, 
+        '鼻の位置' => :nose_position_score,
+        '顎の位置' => :jawline_score,
+        '自然度・バランス' => :naturalness_and_balance_score,
+        '総合評価' => :smile_score        
+      }
+    end
+
     def default_meta_tags
     {
       site: 'スマプラ！',
