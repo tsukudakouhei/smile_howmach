@@ -22,7 +22,25 @@
     </div>
   <% end %>
 </div>
-<canvas id="myRadarChart"></canvas>
+<script>
+  window.chartData = <%= @chart_data.to_json.html_safe %>;
+</script>
+<div class="mx-auto" style="width: 700px; height: 700px;">
+  <canvas id="myRadarChart" width="700" height="700"></canvas>
+</div>
+<div class="grid grid-cols-2 gap-4 text-center text-gray-900 font-bold text-1xl">
+  <% smile_analysis_score_attributes.each do |text, attribute| %>
+    <div>
+      <div class="text-gray-500 mb-1">
+        <%= text %>
+      </div>
+      <div>
+        <%= "#{@smile_price.smile_analysis_score.send(attribute)}点" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 <%= form_with model: @smile_price, method: :patch, class: "max-w-xl rounded-lg mx-auto", local: true do |f| %>
 
   <div class="form-group flex items-center mt-3 mb-3">
