@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
     
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'radar_chart', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= display_meta_tags(default_meta_tags) %>
@@ -23,6 +24,7 @@
 
       gtag('config', 'G-V2ZTX2H28M');
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         nav {
           background-color: white;
