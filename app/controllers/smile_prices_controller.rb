@@ -1,6 +1,7 @@
 class SmilePricesController < ApplicationController
   skip_before_action :require_login, only: %i[index show update]
   before_action :set_smile_price, only: %i[show edit update]
+  before_action :chart_data, only: %i[show edit]
   require 'aws-sdk-rekognition'
 
   def index
@@ -12,7 +13,6 @@ class SmilePricesController < ApplicationController
   def create
     smile_price_creator = SmilePriceCreator.new(params, current_user)
     @smile_price_record = smile_price_creator.create_smile_price
-
     if @smile_price_record
       redirect_to edit_smile_price_path(@smile_price_record), notice: '診断結果でました！'
     else
@@ -42,5 +42,19 @@ class SmilePricesController < ApplicationController
 
   def set_smile_price
     @smile_price = SmilePrice.find(params[:id])
+  end
+
+  def chart_data
+    score_attributes = [
+      :eye_expression_score,
+      :mouth_expression_score,
+      :nose_position_score,
+      :jawline_score,
+      :naturalness_and_balance_score
+    ]
+
+    @chart_data = score_attributes.map do |attribute|
+      @smile_price.smile_analysis_score.send(attribute)
+    end
   end
 end

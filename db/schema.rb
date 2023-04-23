@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_11_153528) do
+ActiveRecord::Schema.define(version: 2023_04_19_135905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 2023_04_11_153528) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "smile_analysis_scores", force: :cascade do |t|
+    t.integer "smile_score"
+    t.integer "eye_expression_score"
+    t.integer "mouth_expression_score"
+    t.integer "nose_position_score"
+    t.integer "jawline_score"
+    t.integer "naturalness_and_balance_score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "smile_prices", force: :cascade do |t|
     t.integer "price"
     t.bigint "user_id"
@@ -30,6 +41,8 @@ ActiveRecord::Schema.define(version: 2023_04_11_153528) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "body"
     t.boolean "is_published", default: false, null: false
+    t.bigint "smile_analysis_score_id", null: false
+    t.index ["smile_analysis_score_id"], name: "index_smile_prices_on_smile_analysis_score_id"
     t.index ["user_id"], name: "index_smile_prices_on_user_id"
   end
 
@@ -52,6 +65,7 @@ ActiveRecord::Schema.define(version: 2023_04_11_153528) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "smile_prices", "smile_analysis_scores"
   add_foreign_key "smile_prices", "users"
   add_foreign_key "smileprices_macdmenus", "mac_menus"
   add_foreign_key "smileprices_macdmenus", "smile_prices"
