@@ -7,10 +7,10 @@ const ctx = document.getElementById('myRadarChart');
     // ... Radar chart configuration goes here
         type: 'radar',
         data: {
-            labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+            labels: ['目の表情', '口元の表情', '鼻の位置', '顎の位置', '自然度・バランス'],
             datasets: [{
-                label: 'My First Dataset',
-                data: [65, 59, 90, 81, 56, 55, 40],
+                label: 'ChatGPTからの分析結果',
+                data: window.chartData,
                 fill: true,
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgb(255, 99, 132)',
@@ -18,21 +18,20 @@ const ctx = document.getElementById('myRadarChart');
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
                 pointHoverBorderColor: 'rgb(255, 99, 132)'
-            }, {
-                label: 'My Second Dataset',
-                data: [28, 48, 40, 19, 96, 27, 100],
-                fill: true,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgb(54, 162, 235)',
-                pointBackgroundColor: 'rgb(54, 162, 235)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgb(54, 162, 235)'
             }]
         },
+        options: {
+            scale: {
+                min: 0, // Set the minimum value for the scale
+                max: 20, // Set the maximum value for the scale
+                stepSize: 5, // Set the step size between the ticks
+            },
+            responsive: false, // レスポンシブ設定を有効にする
+            maintainAspectRatio: false, // アスペクト比の維持を無効にする
+    },
     });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  createRadarChart();
+    createRadarChart();
 });
