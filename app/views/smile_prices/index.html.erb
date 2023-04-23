@@ -16,9 +16,9 @@
         感想:
         <%= smile_price.body %>
       </h1>
-      <div class="flex flex-wrap mx-2">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mx-2">
         <% smile_price.mac_menus.each do |mac_menu| %>
-          <div class="w-full sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 mb-4">
+          <div class="px-2 mb-4">
             <div class="relative h-0" style="padding-bottom: 75%">
               <%= image_tag mac_menu.image, class: 'absolute h-full w-full object-cover', id: 'preview' %>
             </div>

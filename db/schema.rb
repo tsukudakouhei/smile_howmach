@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2023_04_19_135905) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "body"
     t.boolean "is_published", default: false, null: false
-    t.bigint "smile_analysis_score_id", null: false
+    t.bigint "smile_analysis_score_id"
     t.index ["smile_analysis_score_id"], name: "index_smile_prices_on_smile_analysis_score_id"
     t.index ["user_id"], name: "index_smile_prices_on_user_id"
   end
