@@ -1,10 +1,10 @@
 const createRadarChart = () => {
-const ctx = document.getElementById('myRadarChart');
-  if (!ctx) return; // If the element doesn't exist, exit the function
+    const ctx = document.getElementById('myRadarChart');
+    if (!ctx) return; // If the element doesn't exist, exit the function
 
     ctx.getContext('2d');
     new window.Chart(ctx, { // Use window.Chart instead of just Chart
-    // ... Radar chart configuration goes here
+        // ... Radar chart configuration goes here
         type: 'radar',
         data: {
             labels: ['目の表情', '口元の表情', '鼻の位置', '顎の位置', '自然度・バランス'],
@@ -21,15 +21,15 @@ const ctx = document.getElementById('myRadarChart');
             }]
         },
         options: {
-            scale: {
-                min: 0, // Set the minimum value for the scale
-                max: 20, // Set the maximum value for the scale
-                stepSize: 5, // Set the step size between the ticks
-            },
-            responsive: false, // レスポンシブ設定を有効にする
-            maintainAspectRatio: false, // アスペクト比の維持を無効にする
-    },
-    });
+        scale: {
+            min: 0, // Set the minimum value for the scale
+            max: 20, // Set the maximum value for the scale
+            stepSize: 5, // Set the step size between the ticks
+        },
+        responsive: true, // Enable responsive settings
+        maintainAspectRatio: true // Maintain aspect ratio
+        },
+        });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
