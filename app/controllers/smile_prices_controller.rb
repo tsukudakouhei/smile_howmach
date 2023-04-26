@@ -1,6 +1,7 @@
 class SmilePricesController < ApplicationController
   skip_before_action :require_login, only: %i[index show update]
   before_action :set_smile_price, only: %i[show edit update]
+  before_action -> { currect_user(@smile_price) }, only: %i[edit update]
   before_action :chart_data, only: %i[show edit]
   require 'aws-sdk-rekognition'
 
