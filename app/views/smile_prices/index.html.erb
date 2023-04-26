@@ -2,16 +2,18 @@
 <div class="flex flex-wrap mx-2">
   <% @smile_prices.each do |smile_price| %>
     <div class="border w-full mb-2">
-      <h1 class="text-1xl text-gray-900 font-bold text-center m-3">
-        <a class="text-2xl font-bold">
-          <%= smile_price.user.name %>
-        </a>
-        さんのスマイルは、
-        <a class="text-4xl font-bold">
-          <%= smile_price.price %>
-        </a>
-        円
-      </h1>
+      <%= link_to smile_price_path(smile_price), class: 'hover:no-underline' do %>
+        <h1 class="text-1xl text-gray-900 font-bold text-center m-3">
+          <span class="text-2xl font-bold hover:text-red-500">
+            <%= smile_price.user.name %>
+          </span>
+          さんのスマイルは、
+          <span class="text-4xl font-bold hover:text-red-500">
+            <%= smile_price.price %>
+          </span>
+          円
+        </h1>
+      <% end %>
       <h1 class="text-2xl text-gray-900 font-bold text-center m-3">
         感想:
         <%= smile_price.body %>
