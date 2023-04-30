@@ -47,6 +47,8 @@ class SmilePricesController < ApplicationController
   end
 
   def chart_data
+    return unless @smile_price.smile_analysis_score
+    
     score_attributes = [
       :eye_expression_score,
       :mouth_expression_score,
