@@ -10,7 +10,9 @@
         <div class="flex items-center justify-center mb-2 border border-black-500 p-2 rounded">
           <%= image_tag 'sample.jpeg', class: 'h-150 w-250 object-contain', id: 'preview' %>
         </div>
-
+        <video id="webcam" autoplay></video>
+        <button id="capture">撮影</button>
+        <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
         <div class="flex justify-center">
           <a class="mt-4 px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-700 transition duration-200">
             <%= f.submit "送信" %>
@@ -19,6 +21,98 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  const videoElement = document.getElementById('webcam');
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function (stream) {
+        videoElement.srcObject = stream;
+      })
+      .catch(function (error) {
+        console.error("Error accessing webcam: " + error);
+      });
+  } else {
+    console.error("getUserMedia not supported");
+  }
+  const captureButton = document.getElementById('capture');
+  const canvasElement = document.getElementById('canvas');
+  const ctx = canvasElement.getContext('2d');
+
+  captureButton.addEventListener('click', () => {
+    canvasElement.width = videoElement.videoWidth;
+    canvasElement.height = videoElement.videoHeight;
+    ctx.drawImage(videoElement, 0, 0, videoElement.videoWidth, videoElement.videoHeight);
+      
+    // 画像データを取得
+    const imageData = canvasElement.toDataURL('image/png');
+    // 画像データをBlob形式に変換
+    const imageBlob = base64ToBlob(imageData);
+    // 画像データを処理する
+    sendImageDataToServer(imageBlob);
+  });
+
+    function sendImageDataToServer(imageBlob) {
+    const formData = new FormData();
+    formData.append('image', imageBlob);
+
+    fetch('/smile_prices', {
+      method: 'POST',
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return response.json().then(errorData => {
+          throw errorData;
+        });
+      }
+    })
+    .then(data => {
+      console.log('Success:', data);
+      if (data.redirect_url) {
+        window.location.href = data.redirect_url;
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      if (error.error) {
+        displayErrorMessage(error.error);
+      } else {
+        // その他のエラー処理
+      }
+    });
+  }
+
+  function displayErrorMessage(message) {
+    const flashMessageContainer = document.createElement('div');
+    flashMessageContainer.classList.add('alert', 'alert-danger');
+    flashMessageContainer.textContent = message;
+
+    const flashMessageArea = document.getElementById('flash-message-area');
+    flashMessageArea.appendChild(flashMessageContainer);
+
+    setTimeout(() => {
+      flashMessageContainer.remove();
+    }, 5000); // 5秒後にメッセージを削除
+  }
+  function base64ToBlob(base64Data) {
+  const binaryData = atob(base64Data.split(',')[1]);
+  const arrayBuffer = new ArrayBuffer(binaryData.length);
+  const byteArray = new Uint8Array(arrayBuffer);
+
+  for (let i = 0; i < binaryData.length; i++) {
+    byteArray[i] = binaryData.charCodeAt(i);
+  }
+
+  const blob = new Blob([arrayBuffer], { type: 'image/png' });
+  return blob;
+  }
+</script>
 
 <script>
   function previewImage() {
