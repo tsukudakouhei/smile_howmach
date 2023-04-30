@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: %i[new create]
+  before_action -> { currect_user(@user) }, only: %i[edit update
 
   def new
     @user = User.new
