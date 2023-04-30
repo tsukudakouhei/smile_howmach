@@ -18,6 +18,8 @@
 
   <div class="flex justify-center">
     <%= link_to "みんなのスマイル", smile_prices_path, class: "bg-red-500 hover:bg-red-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg mr-4" %>
-    <%= link_to "edit", edit_smile_price_path(@smile_price), class: "bg-yellow-500 hover:bg-yellow-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg" %>
+    <% if current_user == @smile_price.user %>
+      <%= link_to "edit", edit_smile_price_path(@smile_price), class: "bg-yellow-500 hover:bg-yellow-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg" %>
+    <% end %>
   </div>
 </div>
