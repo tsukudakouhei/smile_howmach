@@ -12,13 +12,21 @@ class SmilePricesController < ApplicationController
   def new; end
 
   def create
-    smile_price_creator = SmilePriceCreator.new(params, current_user)
+    image_data = params[:image]
+    smile_price_creator = SmilePriceCreator.new(image_data, current_user)
     @smile_price_record = smile_price_creator.create_smile_price
     if @smile_price_record
-      redirect_to edit_smile_price_path(@smile_price_record), notice: '診断結果でました！'
+      binding.pry
+      # redirect_to edit_smile_price_path(@smile_price_record), notice: '診断結果でました！'
+      respond_to do |format|
+        format.html { redirect_to edit_smile_price_path(@smile_price_record), notice: '診断結果でました！' }
+        format.json { render json: { redirect_url: edit_smile_price_path(@smile_price_record) } }
+      end
     else
-      flash.now[:alert] = "診断失敗しました。"
-      render :new
+      binding.pry
+      render json: { error: "エラaーメッセージ" }, status: :unprocessable_entity
+      # flash.now[:alert] = smile_price_creator.error
+      # render :new
     end
   end
 
