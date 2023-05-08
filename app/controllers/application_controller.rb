@@ -8,8 +8,14 @@ class ApplicationController < ActionController::Base
     redirect_to login_path
   end
 
-  def currect_user(resource)
-    unless resource.user == current_user
+  def correct_user(resource)
+    if resource.is_a?(User)
+      user_to_check = resource
+    else
+      user_to_check = resource.user
+    end
+
+    unless user_to_check == current_user
       flash[:error] = "権限がありません"
       redirect_to smile_prices_path
     end
