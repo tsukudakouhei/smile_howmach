@@ -1,11 +1,13 @@
 class SmilePriceCreator
-  def initialize(params, current_user)
-    @params = params
+  attr_reader :error
+  def initialize(image, current_user)
+    @image = image
     @current_user = current_user
   end
 
   def create_smile_price
-    rekognition_service = RekognitionService.new(@params[:image])
+    return nil unless validate_image_param
+    rekognition_service = RekognitionService.new(@image)
     rekognition_data = rekognition_service.analyze_image
 
     chatgpt_service = ChatgptService.new(rekognition_data)
@@ -27,6 +29,15 @@ class SmilePriceCreator
   end
 
   private
+
+  def validate_image_param
+    if @image.blank?
+      @error = "診断失敗しました。"
+      false
+    else
+      true
+    end
+  end
 
   def smile_price_score_change_price(smile_score)
     smile_score * 15 

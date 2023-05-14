@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     else
       user_to_check = resource.user
     end
-
+    
     unless user_to_check == current_user
       flash[:error] = "権限がありません"
       redirect_to smile_prices_path
