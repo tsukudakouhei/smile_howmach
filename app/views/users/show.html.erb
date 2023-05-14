@@ -1,0 +1,71 @@
+<h2 class="text-2xl text-gray-900 font-bold text-center m-12"><%= current_user_name %>さんの
+診断履歴
+</h2>
+<div class="mx-2">
+  <% @user.smile_prices.each do |smile_price| %>
+    <div class="border p-4 mb-4">
+      <div class="flex justify-center items-center">
+        <div class="text-2xl text-gray-900 font-bold">スマイル価格: <%= smile_price.price %>円</div>
+        <div class="text-1xl text-gray-900 font-bold ml-8">
+          (診断日: <%= smile_price.created_at.strftime("%Y-%m-%d") %>)
+        </div>
+      </div>
+      <h1 class="text-2xl text-gray-900 font-bold text-center m-3">
+        感想:
+        <%= smile_price.body %>
+      </h1>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <% smile_price.mac_menus.each do |mac_menu| %>
+          <div class="px-2 mb-4">
+            <div class="relative h-0" style="padding-bottom: 75%">
+              <%= image_tag mac_menu.image, class: 'absolute h-full w-full object-cover', id: 'preview' %>
+            </div>
+            <div class="px-4 py-2">
+              <h3 class="text-lg font-bold text-gray-900 mb-2"><%= mac_menu.name %></h3>
+              <div class="text-gray-700 font-bold"><%= mac_menu.price %>円</div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="flex justify-center">
+        <% if current_user == smile_price.user %>
+          <%= link_to "show", smile_price_path(smile_price), class: "bg-red-500 hover:bg-red-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+<% if @chart_data %>
+  <h2 class="text-2xl text-gray-900 font-bold text-center m-12">ChatGPTからスマイル分析結果</h2>
+  <script>
+    window.chartData = <%= @chart_data.to_json.html_safe %>;
+  </script>
+  <div class="mx-auto aspect-ratio aspect-ratio-1/1" style="width: 100%; max-width: 700px;">
+    <canvas id="myRadarChart"></canvas>
+  </div>
+  <div class="text-center text-gray-900 font-bold text-2xl my-4">
+    <% text, attribute = smile_analysis_score_attributes.to_a.last %>
+    <div class="text-gray-500 mb-1">
+      <%= text %>
+    </div>
+    <div>
+      <%= "#{@smile_price.smile_analysis_score.send(attribute)}点" %>
+    </div>
+  </div>
+  <div class="grid grid-cols-5 gap-3 text-center text-gray-900 font-bold text-1xl mb-5">
+    <% smile_analysis_score_attributes.each_with_index do |(text, attribute), index| %>
+      <% if index < smile_analysis_score_attributes.length - 1 %>
+        <div>
+          <div class="text-gray-500 mb-1">
+            <%= text %>
+          </div>
+          <div>
+            <%= "#{@smile_price.smile_analysis_score.send(attribute)}点" %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
