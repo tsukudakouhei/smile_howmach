@@ -7,7 +7,6 @@ class SmilePriceCreator
 
   def create_smile_price
     return nil unless validate_image_param
-    
     rekognition_service = RekognitionService.new(@image)
     rekognition_data = rekognition_service.analyze_image
 
