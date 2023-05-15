@@ -1,4 +1,8 @@
 module ApplicationHelper
+    def current_user_name
+      current_user.name
+    end
+
     def smile_analysis_score_attributes 
       {
         '目の表情' => :eye_expression_score,

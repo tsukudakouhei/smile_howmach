@@ -3,6 +3,7 @@
     <div class="flex text-center m-4">
       <a href="#" class="text-black font-bold text-lg hover:text-red-500 transition duration-200 font-medium py-1 md:py-2 px-4 md:px-6">about</a>
       <%= link_to 'みんなのスマイル', smile_prices_path, class: "text-black font-bold text-lg hover:text-red-500 transition duration-200 font-medium py-1 md:py-2 px-4 md:px-6" %>
+      <%= link_to "My Page", user_path(current_user), class: "text-black font-bold text-lg hover:text-red-500 transition duration-200 font-medium py-1 md:py-2 px-4 md:px-6" %>
       <%= link_to 'スマイル診断', new_smile_price_path, class: "bg-red-500 hover:bg-red-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg"  %>
       <%= link_to 'ログアウト', logout_path, class: "bg-yellow-500 hover:bg-yellow-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg", method: :delete %>
     </div>
@@ -24,6 +25,13 @@
             <div class="mx-auto">
               <div class="mx">
                 <%= link_to 'みんなのスマイル', smile_prices_path, class: "text-black font-bold text-lg hover:text-red-500 transition duration-200 font-medium py-1 md:py-2 px-4 md:px-6" %>
+              </div>
+            </div>
+          </div>
+          <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+            <div class="mx-auto">
+              <div class="mx">
+                <%= link_to "My Page", user_path(current_user), class: "text-black font-bold text-lg hover:text-red-500 transition duration-200 font-medium py-1 md:py-2 px-4 md:px-6" %>
               </div>
             </div>
           </div>
