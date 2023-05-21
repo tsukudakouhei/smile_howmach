@@ -30,15 +30,20 @@ module ApplicationHelper
         description: :description,
         type: 'website',
         url: request.original_url,
-        image: image_url('sample.jpeg'), # 配置するパスやファイル名によって変更すること
+        image: image_url('site_logo.png'), # 配置するパスやファイル名によって変更すること
         local: 'ja-JP'
       },
       # Twitter用の設定を個別で設定する
       twitter: {
         card: 'summary_large_image', # Twitterで表示する場合は大きいカードにする
         site: '@', # アプリの公式Twitterアカウントがあれば、アカウント名を書く
-        image: image_url('sample.jpeg') # 配置するパスやファイル名によって変更すること
+        image: image_url('site_logo.png') # 配置するパスやファイル名によって変更すること
       }
     }
+  end
+
+  def twitter_share_message(smile_price)
+    message = "&text=【私のスマイルは#{ smile_price.price }円です!】%0a%0a【スマプラ！】であなたのスマイルに値段をつけて、値段にあったマックメニューを提案します！%0a%0a ChatGPTがあなたのスマイルを分析！%0a%0a"
+    return message
   end
 end
