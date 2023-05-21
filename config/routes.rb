@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'tops#index'
+  root 'smile_prices#index'
+  get 'about', to: "tops#index"
   get 'terms_of_use', to: "tops#terms_of_use"
   get 'privacy_policy', to: "tops#privacy_policy"
   
