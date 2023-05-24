@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_19_135905) do
+ActiveRecord::Schema.define(version: 2023_05_24_115552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2023_04_19_135905) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "body"
-    t.boolean "is_published", default: false, null: false
+    t.boolean "is_published", default: true, null: false
     t.bigint "smile_analysis_score_id"
     t.index ["smile_analysis_score_id"], name: "index_smile_prices_on_smile_analysis_score_id"
     t.index ["user_id"], name: "index_smile_prices_on_user_id"

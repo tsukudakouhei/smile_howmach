@@ -10,14 +10,14 @@
   <%= f.label "感想投稿", class: "text-lg font-bold text-gray-900 mb-5" %>
   <%= f.text_area :body, class: "w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2 mb-5" %>
 
-  <div class="flex justify-center">
-    <a class="w-59 h-30 bg-red-500 hover:bg-red-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg mb-3 mr-4">
-      <%= f.submit "アプリ内 Share", class: "cursor-pointer" %>
-    </a>
-    <%= link_to "https://twitter.com/share?url=https://www.smile-price.com/#{@smile_price.id}/#{twitter_share_message(@smile_price)}", target: '_blank', class:"bg-blue-500 hover:bg-blue-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg" do %>
-      <i class="fab fa-twitter "></i>
-      <span>Twitter Share</span>
-    <% end %>
-    <%= link_to "みんなのスマイル",  smile_prices_path, class: "w-50 h-11 bg-yellow-500 hover:bg-yellow-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg"  %>
-  </div>
+  <div class="flex flex-wrap justify-center gap-4">
+  <a class="flex items-center justify-center bg-red-500 hover:bg-red-700 text-white rounded-full py-2 px-4 md:px-6 font-bold text-sm md:text-base w-full sm:w-auto mb-3">
+    <%= f.submit "アプリ内 Share", class: "cursor-pointer" %>
+  </a>
+  <%= link_to "https://twitter.com/share?url=https://www.smile-price.com/#{@smile_price.id}/#{twitter_share_message(@smile_price)}", target: '_blank', class:"flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white rounded-full py-2 px-4 md:px-6 font-bold text-sm md:text-base w-full sm:w-auto mb-3" do %>
+    <i class="fab fa-twitter mr-2"></i>
+    <span>Twitter Share</span>
+  <% end %>
+  <%= link_to "みんなのスマイル",  smile_prices_path, class: "flex items-center justify-center bg-yellow-500 hover:bg-yellow-700 text-white rounded-full py-2 px-4 md:px-6 font-bold text-sm md:text-base w-full sm:w-auto mb-3"  %>
+</div>
 <% end %>
