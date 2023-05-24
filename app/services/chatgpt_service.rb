@@ -6,7 +6,17 @@ class ChatgptService
   end
 
   def analyze_data
-      prompt = "Please analyze the smile in the image using the provided data: #{@rekognition_data}\n"\
+      smile_confidence =  @rekognition_data.first[:smile].confidence
+      eyes_open_confidence = @rekognition_data.first[:eyes_open].confidence
+      mouth_open_confidence = @rekognition_data.first[:mouth_open].confidence
+      emotions = @rekognition_data.first[:emotions].map { |emotion| "#{emotion.type} (confidence: #{emotion.confidence})" }.join(', ')
+      landmarks = @rekognition_data.first[:landmarks].map { |landmark| "#{landmark.type} (x: #{landmark.x}, y: #{landmark.y})" }.join(', ')
+      prompt = "Please analyze the smile in the image using the provided data:\n"\
+          "Smile confidence: #{smile_confidence}\n"\
+          "Eyes open confidence: #{eyes_open_confidence}\n"\
+          "Mouth open confidence: #{mouth_open_confidence}\n"\
+          "Emotions: #{emotions}\n"\
+          "Landmarks: #{landmarks}\n"\
           "For each aspect of the smile, provide a numeric rating on a scale of 1 to 20 (1 being the lowest, 20 being the highest).\n"\
           "1. Eye expression rating:\n"\
           "2. Mouth expression rating:\n"\
@@ -14,15 +24,15 @@ class ChatgptService
           "4. Jawline rating:\n"\
           "5. Naturalness and balance rating:"
       response = client.completions(
-        engine: "text-davinci-002",
+        engine: "text-davinci-003",
         prompt: prompt,
         max_tokens: 150,
         n: 1,
         stop: nil,
-        temperature: 0.5
+        temperature: 0
       )
     text = response.choices[0].text
-
+    puts "ChatGPT response: #{text}"
     @eye_score = text[/eye expression.*?(?:rated at )?(\d{1,2})/i, 1].to_i
     @mouth_score = text[/mouth expression.*?(?:rated at )?(\d{1,2})/i, 1].to_i
     @nose_score = text[/nose position.*?(?:rated at )?(\d{1,2})/i, 1].to_i

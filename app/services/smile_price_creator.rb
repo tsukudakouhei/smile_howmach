@@ -21,8 +21,13 @@ class SmilePriceCreator
     @smile_price_record = @current_user.smile_prices.build(price: smile_price)
     @smile_price_record.smile_analysis_score = temp_smile_price_instance.smile_analysis_score
     if @smile_price_record.save
-      create_smileprice_macmenus(@smile_price_record)
-      return @smile_price_record
+      begin
+        create_smileprice_macmenus(@smile_price_record)
+        return @smile_price_record
+      rescue RuntimeError => e
+        puts e.message
+        return false
+      end
     else
       return false
     end
@@ -46,6 +51,7 @@ class SmilePriceCreator
   def create_smileprice_macmenus(smile_price)
     smile_price = smile_price.price
     mac_menu_price_min = MacMenu.select("price").order("price asc").first.price
+    raise if smile_price < mac_menu_price_min
     jackpot_menu = rand(1..10)
     while true
       if jackpot_menu == 1
