@@ -14,7 +14,7 @@
     <a class="w-59 h-30 bg-red-500 hover:bg-red-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg mb-3 mr-4">
       <%= f.submit "アプリ内 Share", class: "cursor-pointer" %>
     </a>
-    <%= link_to "https://twitter.com/share?url=https://www.smile-price.com/#{twitter_share_message(@smile_price)}", target: '_blank', class:"w-50 h-11 bg-blue-500 hover:bg-blue-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg mr-2" do %>
+    <%= link_to "https://twitter.com/share?url=https://www.smile-price.com/#{@smile_price.id}/#{twitter_share_message(@smile_price)}", target: '_blank', class:"bg-blue-500 hover:bg-blue-700 text-white rounded-full py-1 md:py-2 px-4 md:px-6 font-bold text-base md:text-lg" do %>
       <i class="fab fa-twitter "></i>
       <span>Twitter Share</span>
     <% end %>
