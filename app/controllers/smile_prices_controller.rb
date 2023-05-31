@@ -4,8 +4,6 @@ class SmilePricesController < ApplicationController
   before_action -> { correct_user(@smile_price) }, only: %i[edit update]
   before_action :chart_data, only: %i[show edit]
 
-  require 'aws-sdk-rekognition'
-
   def index
     @smile_prices = SmilePrice.where(is_published: true).includes(:user).order(created_at: :desc).page(params[:page])
   end
