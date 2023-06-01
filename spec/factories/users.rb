@@ -8,5 +8,9 @@ FactoryBot.define do
     trait :invalid do
       name { "" } # nameが空の場合
     end
+
+    trait :invalid_email do
+      email { "invalid_email" } # emailが形式が正しくない場合
+    end
   end
 end
