@@ -52,10 +52,3 @@ https://www.smile-price.com/
 
 ##  ■画面遷移図
 https://www.figma.com/file/MhJSC7Q9ncl2AAAimumCpn/%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AA%E3%82%AA?node-id=0%3A1&t=HY4VuqnBBvRa6BU0-1
-
-## ■スケジュール
-- 企画（アイデア企画・技術調査）：1/20 〆切
-- 設計（README作成・画面遷移図作成・ER図作成）：1/18 〆切
-- 機能実装：1/18 - 2/15
-- MVPリリース：2/15〆切
-- 本リリース：2月末
