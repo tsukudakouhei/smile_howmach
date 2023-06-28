@@ -51,7 +51,7 @@ https://www.smile-price.com/
 よりたくさん笑顔がこの世界に溢れると。。。
 
 ##  ■ER図
-![ER図](https://i.gyazo.com/81b0e19249cb92e8d6c04dd121cacb0c.png) "ER図")
+![ER図](https://i.gyazo.com/81b0e19249cb92e8d6c04dd121cacb0c.png)
 
 ##  ■画面遷移図
 https://www.figma.com/file/MhJSC7Q9ncl2AAAimumCpn/%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AA%E3%82%AA?node-id=0%3A1&t=HY4VuqnBBvRa6BU0-1
